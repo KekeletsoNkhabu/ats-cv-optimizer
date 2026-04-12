@@ -1,0 +1,60 @@
+// lib/pricing.ts
+import { PricingPlan } from "./types";
+
+export const PLANS: PricingPlan[] = [
+  {
+    id: "free",
+    name: "Starter",
+    price: 0,
+    period: "forever",
+    description: "Everything you need to understand your ATS match.",
+    features: [
+      "ATS compatibility score (0–100)",
+      "Keyword gap analysis",
+      "Sub-scores: keywords, experience, format",
+      "Up to 6 improvement suggestions",
+      "Unlimited re-analyses",
+      "No account required",
+    ],
+    cta: "Get started free",
+    highlighted: false,
+  },
+  {
+    id: "pro",
+    name: "Pro",
+    price: 7.99,
+    period: "per CV",
+    badge: "Most popular",
+    description: "Let AI rewrite your CV perfectly tailored to the job.",
+    features: [
+      "Everything in Starter",
+      "AI-powered CV rewrite (Google Gemini)",
+      "Keyword-optimized content",
+      "Tailored professional summary",
+      "Achievement-focused bullet points",
+      "Downloadable tailored CV (.txt)",
+      "Copy to clipboard",
+    ],
+    cta: "Get my tailored CV",
+    highlighted: true,
+  },
+  {
+    id: "expert",
+    name: "Expert",
+    price: 19.99,
+    period: "per month",
+    badge: "Best value",
+    description: "Unlimited tailoring for your entire job search.",
+    features: [
+      "Everything in Pro",
+      "Unlimited AI CV tailoring",
+      "Cover letter generation",
+      "LinkedIn summary rewrite",
+      "Multiple job role targeting",
+      "Priority AI processing",
+      "Email support",
+    ],
+    cta: "Start Expert plan",
+    highlighted: false,
+  },
+];
