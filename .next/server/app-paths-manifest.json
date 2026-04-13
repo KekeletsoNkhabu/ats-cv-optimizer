@@ -1,4 +1,6 @@
 {
-  "/pricing/page": "app/pricing/page.js",
-  "/page": "app/page.js"
+  "/tailor/page": "app/tailor/page.js",
+  "/dashboard/page": "app/dashboard/page.js",
+  "/results/page": "app/results/page.js",
+  "/api/tailor/route": "app/api/tailor/route.js"
 }

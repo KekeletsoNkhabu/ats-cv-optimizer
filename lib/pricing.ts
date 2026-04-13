@@ -28,7 +28,7 @@ export const PLANS: PricingPlan[] = [
     description: "Let AI rewrite your CV perfectly tailored to the job.",
     features: [
       "Everything in Starter",
-      "AI-powered CV rewrite (Google Gemini)",
+      "AI-powered CV rewrite (Groq · Llama 3.3 70B)",
       "Keyword-optimized content",
       "Tailored professional summary",
       "Achievement-focused bullet points",

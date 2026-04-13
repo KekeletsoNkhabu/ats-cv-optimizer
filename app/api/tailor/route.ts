@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
-const GEMINI_URL =
-  "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent";
+const GROQ_URL = "https://api.groq.com/openai/v1/chat/completions";
+const MODEL = "llama-3.3-70b-versatile";
 
 function buildPrompt(cvText: string, jobDescription: string): string {
   return `You are an elite CV writer and ATS optimization specialist with 15+ years of experience helping candidates land roles at top companies.
@@ -77,52 +77,57 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const apiKey = process.env.GEMINI_API_KEY;
-    if (!apiKey || apiKey === "your_free_gemini_api_key_here") {
+    const apiKey = process.env.GROQ_API_KEY;
+    if (!apiKey || apiKey === "your_free_groq_api_key_here") {
       return NextResponse.json(
         {
           error:
-            "Gemini API key not configured. Copy .env.example to .env.local and add your free key from https://aistudio.google.com/app/apikey",
+            "Groq API key not configured. Copy .env.example to .env.local and add your free key from https://console.groq.com/keys",
         },
         { status: 500 },
       );
     }
 
-    const prompt = buildPrompt(cvText, jobDescription);
-
-    const geminiRes = await fetch(`${GEMINI_URL}?key=${apiKey}`, {
+    const groqRes = await fetch(GROQ_URL, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${apiKey}`,
+      },
       body: JSON.stringify({
-        contents: [{ parts: [{ text: prompt }] }],
-        generationConfig: {
-          temperature: 0.65,
-          topK: 40,
-          topP: 0.9,
-          maxOutputTokens: 3072,
-        },
-        safetySettings: [
-          { category: "HARM_CATEGORY_HARASSMENT", threshold: "BLOCK_NONE" },
-          { category: "HARM_CATEGORY_HATE_SPEECH", threshold: "BLOCK_NONE" },
+        model: MODEL,
+        messages: [
+          {
+            role: "system",
+            content:
+              "You are an elite CV writer. Return only the formatted CV markdown — no extra commentary, no preamble, no sign-off.",
+          },
+          {
+            role: "user",
+            content: buildPrompt(cvText, jobDescription),
+          },
         ],
+        temperature: 0.65,
+        max_tokens: 3072,
+        top_p: 0.9,
+        stream: false,
       }),
     });
 
-    if (!geminiRes.ok) {
-      const errBody = await geminiRes.json().catch(() => ({}));
+    if (!groqRes.ok) {
+      const errBody = await groqRes.json().catch(() => ({}));
       const msg =
         (errBody as { error?: { message?: string } })?.error?.message ||
-        `Gemini API error (${geminiRes.status})`;
-      return NextResponse.json({ error: msg }, { status: geminiRes.status });
+        `Groq API error (${groqRes.status})`;
+      return NextResponse.json({ error: msg }, { status: groqRes.status });
     }
 
-    const data = await geminiRes.json();
-    const tailoredCV: string =
-      data?.candidates?.[0]?.content?.parts?.[0]?.text ?? "";
+    const data = await groqRes.json();
+    const tailoredCV: string = data?.choices?.[0]?.message?.content ?? "";
 
     if (!tailoredCV) {
       return NextResponse.json(
-        { error: "Gemini returned an empty response. Please try again." },
+        { error: "Groq returned an empty response. Please try again." },
         { status: 500 },
       );
     }

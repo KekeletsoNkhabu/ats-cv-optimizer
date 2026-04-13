@@ -148,7 +148,7 @@ function UpsellCard({
           <span className="gradient-text">for this exact role</span>
         </h1>
         <p className="text-text-secondary text-base leading-relaxed max-w-lg mx-auto">
-          Google Gemini will rewrite every section of your CV — keywords,
+          Groq (Llama 3.3 70B) will rewrite every section of your CV — keywords,
           bullets, summary — perfectly aligned to the job you're targeting.
         </p>
       </div>
@@ -446,12 +446,12 @@ export default function TailorPage() {
                       <li>
                         Visit{" "}
                         <a
-                          href="https://aistudio.google.com/app/apikey"
+                          href="https://console.groq.com/keys"
                           target="_blank"
                           rel="noreferrer"
                           className="text-accent-blue underline"
                         >
-                          aistudio.google.com/app/apikey
+                          console.groq.com/keys
                         </a>{" "}
                         (free)
                       </li>
@@ -469,7 +469,7 @@ export default function TailorPage() {
                       <li>
                         Paste your key as{" "}
                         <code className="bg-bg-card px-1 rounded">
-                          GEMINI_API_KEY=…
+                          GROQ_API_KEY=…
                         </code>
                       </li>
                       <li>Restart the dev server</li>
