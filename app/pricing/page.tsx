@@ -20,7 +20,7 @@ const faqs = [
   },
   {
     q: "How is Pro billed?",
-    a: "Pro is a one-time payment of $7.99 per CV tailoring session. There is no subscription. Each time you want to tailor a CV for a different job, you pay once for that session.",
+    a: "Pro is a one-time payment of R130 per CV tailoring session. There is no subscription. Each time you want to tailor a CV for a different job, you pay once for that session.",
   },
   {
     q: "Can I get a refund?",

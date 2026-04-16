@@ -22,7 +22,7 @@ export const PLANS: PricingPlan[] = [
   {
     id: "pro",
     name: "Pro",
-    price: 7.99,
+    price: 130,
     period: "per CV",
     badge: "Most popular",
     description: "Let AI rewrite your CV perfectly tailored to the job.",
@@ -41,7 +41,7 @@ export const PLANS: PricingPlan[] = [
   {
     id: "expert",
     name: "Expert",
-    price: 19.99,
+    price: 300,
     period: "per month",
     badge: "Best value",
     description: "Unlimited tailoring for your entire job search.",

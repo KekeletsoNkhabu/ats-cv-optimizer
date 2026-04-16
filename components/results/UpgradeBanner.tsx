@@ -40,7 +40,7 @@ export default function UpgradeBanner({ score }: Props) {
                 Let AI rewrite your CV for this exact job
               </span>
               <span className="px-2 py-0.5 rounded-md bg-accent-amber/12 border border-accent-amber/25 text-accent-amber text-[10px] font-bold uppercase tracking-wide">
-                $7.99 one-time
+                R130 one-time
               </span>
             </div>
             <p className="text-text-secondary text-sm leading-relaxed max-w-xl">
