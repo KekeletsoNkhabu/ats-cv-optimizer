@@ -19,19 +19,17 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Plain text file — just read and return
     if (file.type === "text/plain") {
       const text = await file.text();
       return NextResponse.json({ text: text.trim() });
     }
 
-    // PDF — extract text with pdf-parse
     const arrayBuffer = await file.arrayBuffer();
     const buffer = Buffer.from(arrayBuffer);
 
-    // Use require to avoid Next.js static-analysis issues with pdf-parse
+    // ✅ Use the internal module to avoid Vercel serverless filesystem errors
     // eslint-disable-next-line @typescript-eslint/no-require-imports
-    const pdfParse = require("pdf-parse");
+    const pdfParse = require("pdf-parse/lib/pdf-parse.js");
     const parsed = await pdfParse(buffer);
 
     const rawText: string = parsed.text ?? "";
@@ -46,12 +44,11 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Clean up common PDF extraction artifacts
     const cleaned = rawText
       .replace(/\r\n/g, "\n")
       .replace(/\r/g, "\n")
-      .replace(/\n{3,}/g, "\n\n") // collapse 3+ blank lines to 2
-      .replace(/[ \t]{2,}/g, " ") // collapse multiple spaces
+      .replace(/\n{3,}/g, "\n\n")
+      .replace(/[ \t]{2,}/g, " ")
       .trim();
 
     return NextResponse.json({ text: cleaned });
