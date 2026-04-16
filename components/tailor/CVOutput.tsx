@@ -491,10 +491,6 @@ export default function CVOutput({ cvMarkdown }: Props) {
           💡 The downloaded PDF is ATS-friendly — clean text-based layout, no
           images or tables.
         </p>
-        <p className="text-text-muted text-xs">
-          Powered by{" "}
-          <span className="text-accent-blue">Groq · Llama 3.3 70B</span>
-        </p>
       </div>
     </motion.div>
   );
