@@ -152,7 +152,7 @@ export default function PaymentModal({ plan, onSuccess, onClose }: Props) {
                     <span className="font-display font-extrabold text-xl text-accent-green">
                       R{plan.price}
                     </span>
-                    <p className="text-text-muted text-xs">USD</p>
+                    <p className="text-text-muted text-xs">ZAR</p>
                   </div>
                 </div>
               </div>
