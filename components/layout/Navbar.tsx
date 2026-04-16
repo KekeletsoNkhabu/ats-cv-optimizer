@@ -87,12 +87,12 @@ export default function Navbar() {
           <div className="hidden md:flex items-center gap-3">
             {isLanding || pathname === "/pricing" ? (
               <>
-                <Link
+                {/* <Link
                   href="/dashboard"
                   className="px-4 py-2 rounded-lg text-sm text-text-secondary hover:text-text-primary transition-colors"
                 >
                   Sign in
-                </Link>
+                </Link> */}
                 <Link
                   href="/dashboard"
                   className="group relative overflow-hidden px-5 py-2.5 rounded-xl bg-accent-green text-bg-base text-sm font-semibold font-display transition-all duration-300 hover:shadow-glow-green-sm"
