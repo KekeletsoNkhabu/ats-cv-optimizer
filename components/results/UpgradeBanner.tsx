@@ -78,7 +78,7 @@ export default function UpgradeBanner({ score }: Props) {
             </motion.div>
           </Link>
           <p className="text-text-muted text-[10px] text-center mt-1.5">
-            Powered by Groq · Free AI
+            Powered by AI
           </p>
         </div>
       </div>

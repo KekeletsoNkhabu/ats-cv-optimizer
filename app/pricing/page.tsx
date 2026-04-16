@@ -148,7 +148,7 @@ export default function PricingPage() {
                     ) : (
                       <>
                         <span className="font-display font-extrabold text-4xl text-text-primary">
-                          ${plan.price}
+                          R{plan.price}
                         </span>
                         <span className="text-text-muted text-sm">
                           / {plan.period}

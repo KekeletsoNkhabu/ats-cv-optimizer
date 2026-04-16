@@ -172,7 +172,7 @@ function UpsellCard({
             <div className="flex-1">
               <div className="flex items-baseline gap-2 mb-4">
                 <span className="font-display font-extrabold text-4xl text-text-primary">
-                  ${plan.price}
+                  R{plan.price}
                 </span>
                 <span className="text-text-muted text-sm">one-time</span>
               </div>
