@@ -1,6 +1,7 @@
 export const runtime = "nodejs";
 
 import { NextRequest, NextResponse } from "next/server";
+import { extractText, getDocumentProxy } from "unpdf";
 
 export async function POST(req: NextRequest) {
   try {
@@ -24,15 +25,12 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ text: text.trim() });
     }
 
+    // PDF — extract with unpdf (serverless-safe)
     const arrayBuffer = await file.arrayBuffer();
-    const buffer = Buffer.from(arrayBuffer);
+    const buffer = new Uint8Array(arrayBuffer);
 
-    // ✅ Use the internal module to avoid Vercel serverless filesystem errors
-    // eslint-disable-next-line @typescript-eslint/no-require-imports
-    const pdfParse = require("pdf-parse/lib/pdf-parse.js");
-    const parsed = await pdfParse(buffer);
-
-    const rawText: string = parsed.text ?? "";
+    const pdf = await getDocumentProxy(buffer);
+    const { text: rawText } = await extractText(pdf, { mergePages: true });
 
     if (!rawText.trim()) {
       return NextResponse.json(
